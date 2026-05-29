@@ -1,0 +1,47 @@
+<div class="auth-page">
+  <nav class="auth-nav">
+    <div class="logo" routerLink="/">
+      <span class="logo-icon">🎨</span>
+      <span class="logo-text">Artify</span>
+    </div>
+    <button class="btn-secondary" routerLink="/signup">S'inscrire</button>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="card-header">
+        <div class="badge">✨ Connexion</div>
+        <h1>Bienvenue sur <span>Artify</span></h1>
+        <p>Transformez vos selfies en chefs-d'œuvre</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" class="modern-form">
+        <div class="form-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <i>📧</i>
+            <input type="email" [(ngModel)]="email" name="email" placeholder="votre@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <div class="input-wrapper">
+            <i>🔒</i>
+            <input type="password" [(ngModel)]="password" name="password" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <p class="error-msg" *ngIf="errorMessage">⚠️ {{ errorMessage }}</p>
+
+        <button type="submit" class="btn-primary" [disabled]="isLoading">
+          {{ isLoading ? 'Connexion...' : 'Se connecter' }}
+        </button>
+      </form>
+
+      <div class="card-footer">
+        <p>Pas encore de compte ? <a routerLink="/signup">Créer un compte</a></p>
+      </div>
+    </div>
+  </div>
+</div>

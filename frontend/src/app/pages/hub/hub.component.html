@@ -1,0 +1,190 @@
+<div class="hub-page">
+
+  <!-- Particules de fond -->
+  <div class="bg-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="hub-nav">
+    <div class="logo" routerLink="/">
+      <span class="logo-mark">✦</span>
+      <span class="logo-name">IMAGIN<span class="dot">.AI</span></span>
+    </div>
+    <div class="nav-right">
+      <span class="nav-tag">Choisissez votre expérience</span>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="hub-header">
+    <p class="hub-eyebrow">TROIS UNIVERS · UNE IMAGE</p>
+    <h1 class="hub-title">
+      Quelle expérience<br>
+      <em>IA</em> aujourd'hui ?
+    </h1>
+    <p class="hub-subtitle">
+      Chaque interface exploite un modèle d'intelligence artificielle distinct.<br>
+      Sélectionnez l'univers qui correspond à votre vision.
+    </p>
+  </header>
+
+  <!-- Cartes des 3 interfaces -->
+  <main class="hub-grid">
+
+    <!-- CARD 1 : ARTIFY -->
+    <div
+      class="exp-card card-artify"
+      [class.is-hovered]="hoveredCard === 'artify'"
+      (mouseenter)="setHovered('artify')"
+      (mouseleave)="setHovered(null)"
+      (click)="navigateTo('/transform')"
+    >
+      <div class="card-number">01</div>
+      <div class="card-glow artify-glow"></div>
+
+      <div class="card-icon-wrap artify-icon-wrap">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M20 44 Q28 20 32 32 Q36 44 44 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="32" cy="32" r="4" fill="currentColor" opacity="0.6"/>
+        </svg>
+      </div>
+
+      <div class="card-body">
+        <span class="card-label">Interface 01</span>
+        <h2 class="card-title">ARTIFY</h2>
+        <p class="card-desc">
+          Transformez vos photos en œuvres d'art grâce au modèle
+          <strong>CycleGAN</strong>. Impressionnisme, expressionnisme,
+          cubisme — choisissez votre style.
+        </p>
+
+        <div class="card-tags">
+          <span class="tag">CycleGAN</span>
+          <span class="tag">WikiArt</span>
+          <span class="tag">CelebA</span>
+        </div>
+
+        <div class="card-meta">
+          <span class="meta-responsible"></span>
+          <span class="meta-status active">● Disponible</span>
+        </div>
+      </div>
+
+      <div class="card-cta">
+        <span>Commencer</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CARD 2 : INSIGHT -->
+    <div
+      class="exp-card card-insight"
+      [class.is-hovered]="hoveredCard === 'insight'"
+      (mouseenter)="setHovered('insight')"
+      (mouseleave)="setHovered(null)"
+      (click)="navigateTo('/insight')"
+    >
+      <div class="card-number">02</div>
+      <div class="card-glow insight-glow"></div>
+
+      <div class="card-icon-wrap insight-icon-wrap">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <rect x="12" y="12" width="40" height="40" rx="8" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="24" cy="26" r="3" fill="currentColor" opacity="0.7"/>
+          <circle cx="40" cy="26" r="3" fill="currentColor" opacity="0.7"/>
+          <path d="M22 38 Q32 46 42 38" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="card-body">
+        <span class="card-label">Interface 02</span>
+        <h2 class="card-title">INSIGHT</h2>
+        <p class="card-desc">
+          Analysez l'émotion dominante d'un visage avec un modèle de
+          <strong>classification faciale</strong>. Obtenez une interprétation
+          visuelle et textuelle.
+        </p>
+
+        <div class="card-tags">
+          <span class="tag">CNN</span>
+          <span class="tag">FER-2013</span>
+          <span class="tag">AffectNet</span>
+        </div>
+
+        <div class="card-meta">
+          <span class="meta-responsible"></span>
+          <span class="meta-status active">● Disponible</span>
+        </div>
+      </div>
+
+      <div class="card-cta">
+        <span>Explorer</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CARD 3 : STYLE ME -->
+    <div
+      class="exp-card card-styleme"
+      [class.is-hovered]="hoveredCard === 'styleme'"
+      (mouseenter)="setHovered('styleme')"
+      (mouseleave)="setHovered(null)"
+      (click)="navigateTo('/styleme')"
+    >
+      <div class="card-number">03</div>
+      <div class="card-glow styleme-glow"></div>
+
+      <div class="card-icon-wrap styleme-icon-wrap">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <path d="M32 8 L40 24 L56 26 L44 38 L47 54 L32 46 L17 54 L20 38 L8 26 L24 24 Z"
+            stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <circle cx="32" cy="32" r="6" fill="currentColor" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="card-body">
+        <span class="card-label">Interface 03</span>
+        <h2 class="card-title">STYLE ME</h2>
+        <p class="card-desc">
+          Analysez votre tenue et recevez des <strong>recommandations
+          vestimentaires</strong> intelligentes. Style casual, chic ou sport
+          — laissez l'IA décider.
+        </p>
+
+        <div class="card-tags">
+          <span class="tag">DeepFashion</span>
+          <span class="tag">Classification</span>
+          <span class="tag">Colors</span>
+        </div>
+
+        <div class="card-meta">
+          <span class="meta-responsible"></span>
+          <span class="meta-status active">● Disponible</span>
+        </div>
+      </div>
+
+      <div class="card-cta">
+        <span>Découvrir</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="hub-footer">
+    <p>IMAGIN.AI · Projet académique · 2024</p>
+  </footer>
+
+</div>

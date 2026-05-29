@@ -1,0 +1,100 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="logo">
+        <span class="icon">🎨</span>
+        <h2>ARTIFY</h2>
+      </div>
+      <p class="subtitle">Créez votre compte pour débuter votre expérience créative.</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="input-group">
+        <label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Nom d'utilisateur
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          required
+          placeholder="Ex: JeanDupont"
+          class="modern-input"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Email
+        </label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          placeholder="votre@email.com"
+          class="modern-input"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="••••••••"
+          class="modern-input"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Confirmer le mot de passe
+        </label>
+        <input
+          type="password"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          required
+          placeholder="••••••••"
+          class="modern-input"
+        >
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="isLoading">
+        <span>{{ isLoading ? 'Inscription en cours...' : 'S\'inscrire' }}</span>
+        <svg *ngIf="!isLoading" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+
+      <p *ngIf="errorMessage" class="error-message">⚠️ {{ errorMessage }}</p>
+      <p *ngIf="successMessage" class="success-message">✅ {{ successMessage }}</p>
+    </form>
+
+    <div class="auth-footer">
+      <p>Vous avez déjà un compte ? <a (click)="goToLogin()">Se connecter</a></p>
+    </div>
+  </div>
+</div>

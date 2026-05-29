@@ -1,0 +1,189 @@
+<div class="insight-page">
+
+  <!-- Page color overlay (émotion) -->
+  <div class="page-color-overlay" [style.background-color]="emotionOverlayColor"></div>
+
+  <!-- Ciel tourbillonnant Van Gogh -->
+  <div class="ins-bg">
+    <div class="swirl-orb s1"></div>
+    <div class="swirl-orb s2"></div>
+    <div class="swirl-orb s3"></div>
+    <div class="swirl-orb s4"></div>
+    <div class="van-star vs1"></div>
+    <div class="van-star vs2"></div>
+    <div class="van-star vs3"></div>
+    <div class="van-star vs4"></div>
+    <div class="van-star vs5"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="ins-nav">
+    <a class="back-btn" routerLink="/hub">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
+    <div class="nav-logo">✦ INSIGHT</div>
+    <div class="nav-badge">EfficientNet-B2 · FER-2013</div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="ins-hero">
+    <p class="ins-eyebrow">ANALYSE ÉMOTIONNELLE</p>
+    <h1 class="ins-title">Lisez les<br><em>émotions</em></h1>
+    <p class="ins-sub">Le modèle EfficientNet-B2 analyse un visage et détecte l'émotion dominante parmi 7 états émotionnels.</p>
+  </header>
+
+  <!-- Workspace -->
+  <main class="ins-main">
+
+    <!-- Upload -->
+    <div class="ins-upload">
+      <div class="panel-label">01 · PHOTO DE VISAGE</div>
+
+      <div class="drop-zone" [class.filled]="imagePreview" (click)="fileInput.click()">
+        <input #fileInput type="file" hidden accept="image/png,image/jpeg,image/jpg,image/webp"
+               (change)="onFileSelected($event)">
+        <ng-container *ngIf="!imagePreview">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="drop-icon">
+            <circle cx="18" cy="14" r="6" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+            <path d="M6 30c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="1"
+                  stroke-linecap="round" opacity="0.25"/>
+            <rect x="1" y="1" width="34" height="34" rx="3" stroke="currentColor"
+                  stroke-dasharray="3 3" stroke-width="1" opacity="0.2"/>
+          </svg>
+          <p class="drop-txt">Photo de visage</p>
+          <p class="drop-hint">PNG, JPG · max 16 MB</p>
+        </ng-container>
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Aperçu" class="preview-img">
+      </div>
+
+      <div class="upload-actions" *ngIf="imagePreview">
+        <button class="btn-ghost" (click)="reset()">✕ Changer</button>
+        <button class="btn-analyze" (click)="analyze()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">✦ Analyser</span>
+          <span *ngIf="isLoading" class="loading-span"><span class="spin"></span> Analyse…</span>
+        </button>
+      </div>
+
+      <!-- Palette émotionnelle -->
+      <div class="palette-section">
+        <p class="palette-label">PALETTE ÉMOTIONNELLE</p>
+        <div class="palette-row">
+          <div *ngFor="let e of emotionConfigs"
+               class="palette-dot"
+               [class.active]="e.key === result?.emotion"
+               [style.background-color]="e.color"
+               [title]="e.fr">
+          </div>
+        </div>
+      </div>
+
+      <!-- Émotions supportées -->
+      <div class="emotions-legend">
+        <p class="legend-label">7 ÉMOTIONS DÉTECTÉES</p>
+        <div class="legend-chips">
+          <span class="emo-chip" *ngFor="let e of ['😠','🤢','😨','😄','😐','😢','😲']">{{ e }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résultats -->
+    <div class="ins-results" *ngIf="result && !isLoading">
+
+      <!-- EMOJI FLASH -->
+      <div class="emoji-flash-wrap">
+        <span class="emoji-flash" [class.shrink]="!showEmojiFlash">{{ result.emoji }}</span>
+      </div>
+
+      <!-- Émotion principale -->
+      <div class="result-main" [style.border-color]="result.color + '40'">
+        <div class="result-info">
+          <h2 class="result-emotion">{{ result.emotion_fr }}</h2>
+          <p class="result-emotion-en">{{ result.emotion }}</p>
+          <div class="confidence-bar-wrap">
+            <div class="confidence-bar"
+                 [style.width.%]="result.confidence"
+                 [style.background]="result.color"></div>
+          </div>
+          <p class="confidence-value" [style.color]="result.color">
+            {{ result.confidence }}% de confiance
+          </p>
+        </div>
+      </div>
+
+      <!-- Citation typewriter -->
+      <div class="quote-card" [style.border-left-color]="result.color">
+        <p class="quote-text">
+          <span *ngFor="let char of quoteChars; let i = index"
+                class="typewriter-char"
+                [style.animation-delay]="(i * 28) + 'ms'">{{ char }}</span>
+        </p>
+        <p class="quote-author">— {{ currentQuoteAuthor }}</p>
+      </div>
+
+      <!-- Top 3 -->
+      <div class="result-section">
+        <p class="section-label">TOP 3 PRÉDICTIONS</p>
+        <div class="top3-list">
+          <div class="top3-item" *ngFor="let item of result.top3; let i = index" [class.top1]="i===0">
+            <span class="top3-emoji">{{ item.emoji }}</span>
+            <span class="top3-label">{{ item.emotion_fr }}</span>
+            <div class="top3-bar-wrap">
+              <div class="top3-bar"
+                   [style.width.%]="item.confidence"
+                   [style.background]="i===0 ? result.color : 'rgba(100,160,255,0.35)'"></div>
+            </div>
+            <span class="top3-pct">{{ item.confidence }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distribution complète -->
+      <div class="result-section">
+        <p class="section-label">DISTRIBUTION COMPLÈTE</p>
+        <div class="all-emotions">
+          <div class="emo-row" *ngFor="let e of result.all_emotions">
+            <span class="emo-icon">{{ e.emoji }}</span>
+            <span class="emo-name">{{ e.emotion_fr }}</span>
+            <div class="emo-bar-wrap">
+              <div class="emo-bar"
+                   [style.width.%]="getBarWidth(e.probability)"
+                   [style.background]="e.emotion === result.emotion ? result.color : 'rgba(100,160,255,0.2)'">
+              </div>
+            </div>
+            <span class="emo-pct">{{ e.probability }}%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Loading -->
+    <div class="ins-loading" *ngIf="isLoading">
+      <div class="pulse-wrap">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring d1"></div>
+        <div class="pulse-ring d2"></div>
+      </div>
+      <p>EfficientNet analyse le visage…</p>
+      <p class="loading-sub">Détection des 7 émotions en cours</p>
+    </div>
+
+    <!-- Idle -->
+    <div class="ins-idle" *ngIf="!result && !isLoading">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <circle cx="28" cy="20" r="12" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+        <path d="M8 52c0-11.046 8.954-20 20-20s20 8.954 20 20"
+              stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.1"/>
+      </svg>
+      <p>{{ imagePreview ? "Cliquez Analyser pour détecter l'émotion" : 'Uploadez une photo de visage' }}</p>
+    </div>
+
+  </main>
+
+  <!-- Error -->
+  <div class="ins-error" *ngIf="errorMessage">⚠ {{ errorMessage }}</div>
+
+</div>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!-- home.component.html — NEW THEME : IMAGIN.AI -->
+<div class="home-root">
+
+  <!-- ── BLOB CANVAS ─────────────────────────────────────────────────────── -->
+  <div class="canvas" aria-hidden="true">
+    <div class="brush b1"></div>
+    <div class="brush b2"></div>
+    <div class="brush b3"></div>
+    <div class="brush b4"></div>
+    <div class="confetti-ring cr1"></div>
+    <div class="confetti-ring cr2"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ NAV -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-letter l-i">I</span><span class="logo-letter l-m">M</span><span class="logo-letter l-a">A</span><span class="logo-letter l-g">G</span><span class="logo-letter l-rest">IN.AI</span>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/" class="nav-link">Accueil</a>
+      <a routerLink="/transform" class="nav-link">Artify</a>
+      <a routerLink="/insight" class="nav-link">Insight</a>
+      <a routerLink="/styleme" class="nav-link">Style Me</a>
+    </div>
+    <a routerLink="/login" class="btn-nav-cta">Se connecter</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════ HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <!-- Badge -->
+      <div class="ai-badge">
+        <span class="badge-dot"></span>
+        IA Artistique · Deep Learning
+      </div>
+
+      <h1 class="hero-h1">
+        Explorez l'image<br>
+        <em class="hero-em">autrement</em>
+      </h1>
+      <p class="hero-p">
+        Transformez, analysez et stylisez vos photos grâce à trois interfaces IA<br>
+        uniques inspirées des grands maîtres.
+      </p>
+
+      <div class="hero-ctas">
+        <a routerLink="/hub" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1l2.47 5.01L17 7.27l-4 3.9.94 5.5L9 14l-4.94 2.67L5 11.17 1 7.27l5.53-.26L9 1z" fill="currentColor"/></svg>
+          Commencer gratuitement
+        </a>
+        <a routerLink="/hub" class="btn-ghost-hero">
+          Voir la démo
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">Interfaces IA</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">Modèles Deep Learning</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Gratuit</span></div>
+      </div>
+    </div>
+
+    <!-- Floating art preview cards -->
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-card ac1">🎨</div>
+      <div class="art-card ac2">🔍</div>
+      <div class="art-card ac3">✨</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ ABOUT -->
+  <section class="about-section">
+    <div class="about-text">
+      <p class="section-eyebrow">— QU'EST-CE QUE IMAGIN.AI ?</p>
+      <h2 class="section-title">L'IA au service<br>de l'art</h2>
+      <p class="about-body">
+        IMAGIN.AI est une plateforme web interactive basée sur le Deep Learning,
+        conçue pour explorer l'image comme moyen d'expression artistique. Elle propose
+        trois expériences IA distinctes : transformer un visage en œuvre d'art, analyser
+        les émotions d'une image, et appliquer le style d'un grand maître à votre photo.
+        Le tout, accessible en quelques clics, sans aucune compétence technique requise.
+      </p>
+    </div>
+    <div class="about-mini-cards">
+      <div class="mini-card mc-orange">
+        <span class="mc-icon">🎨</span>
+        <span class="mc-label">Artify</span>
+      </div>
+      <div class="mini-card mc-blue">
+        <span class="mc-icon">🔍</span>
+        <span class="mc-label">Insight</span>
+      </div>
+      <div class="mini-card mc-green">
+        <span class="mc-icon">✨</span>
+        <span class="mc-label">Style Me</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ INTERFACES -->
+  <section class="interfaces-section">
+    <p class="section-eyebrow center">— NOS 3 EXPÉRIENCES IA</p>
+    <h2 class="section-title center">Choisissez votre univers</h2>
+
+    <!-- Card 1 — Artify -->
+    <div class="iface-card ic-artify">
+      <div class="iface-text">
+        <div class="iface-tag tag-orange">CycleGAN · CelebA · WikiArt</div>
+        <h3 class="iface-h3">Artify — Visage → Art</h3>
+        <p class="iface-p">
+          Transforme une photo de visage réel en une œuvre artistique générée par CycleGAN.
+          Le modèle apprend à peindre comme les grands maîtres.
+        </p>
+        <a routerLink="/transform" class="btn-iface btn-orange">
+          Essayer Artify
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="iface-visual iv-orange">
+        <div class="iv-emoji">🎨</div>
+        <div class="iv-glow"></div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Insight -->
+    <div class="iface-card ic-insight reverse">
+      <div class="iface-visual iv-blue">
+        <div class="iv-emoji">🔍</div>
+        <div class="iv-glow"></div>
+      </div>
+      <div class="iface-text">
+        <div class="iface-tag tag-blue">EfficientNetB3 · RAF-DB · AffectNet</div>
+        <h3 class="iface-h3">Insight — Analyse artistique</h3>
+        <p class="iface-p">
+          Analyse les émotions, les couleurs dominantes et le style artistique probable
+          de n'importe quelle image grâce à EfficientNetB3.
+        </p>
+        <a routerLink="/insight" class="btn-iface btn-blue">
+          Essayer Insight
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 — Style Me -->
+    <div class="iface-card ic-styleme">
+      <div class="iface-text">
+        <div class="iface-tag tag-green">Neural Style Transfer · DeepFashion</div>
+        <h3 class="iface-h3">Style Me — Transfert de style</h3>
+        <p class="iface-p">
+          Applique le style visuel d'une œuvre d'art à votre photo en quelques secondes
+          grâce au Neural Style Transfer.
+        </p>
+        <a routerLink="/styleme" class="btn-iface btn-green">
+          Essayer Style Me
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="iface-visual iv-green">
+        <div class="iv-emoji">✨</div>
+        <div class="iv-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ TEAM -->
+  <section class="team-section">
+    <p class="section-eyebrow center">— L'ÉQUIPE</p>
+    <h2 class="section-title center">Les créateurs derrière<br>IMAGIN.AI</h2>
+    <p class="team-sub">Module Deep Learning — Computer Vision &amp; Modèles Génératifs</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar av-orange">BD</div>
+        <h4 class="team-name">Belkahla Dorra</h4>
+        <p class="team-role"></p>
+        <p class="team-desc"></p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-blue">BE</div>
+        <h4 class="team-name">Belkahla Emna</h4>
+        <p class="team-role"></p>
+        <p class="team-desc"></p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-green">NY</div>
+        <h4 class="team-name">Nouira Yassmine</h4>
+        <p class="team-role"></p>
+        <p class="team-desc"></p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av-violet">JE</div>
+        <h4 class="team-name">Jmili Eya</h4>
+        <p class="team-role"></p>
+        <p class="team-desc"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ FOOTER -->
+  <footer class="home-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-letter l-i">I</span><span class="logo-letter l-m">M</span><span class="logo-letter l-a">A</span><span class="logo-letter l-g">G</span><span class="logo-letter l-rest">IN.AI</span>
+      </div>
+      <div class="footer-links">
+        <a routerLink="/hub" class="footer-link">Expériences</a>
+        <a routerLink="/login" class="footer-link">Connexion</a>
+        <a routerLink="/signup" class="footer-link">Inscription</a>
+      </div>
+      <p class="footer-copy">© 2026 IMAGIN.AI — Projet académique Deep Learning · ESPRIT</p>
+    </div>
+  </footer>
+
+</div>

@@ -1,0 +1,204 @@
+/* ========================================
+   CONTAINER PRINCIPAL (Dégradé kima el Home)
+   ======================================== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ========================================
+   CARD GLASSMORPHISM
+   ======================================== */
+.auth-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 450px; /* Aligné bech ykoun wsa3 chwaya mel login */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ========================================
+   HEADER & LOGO
+   ======================================== */
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.logo .icon { font-size: 32px; }
+
+.logo h2 {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(to right, #1e3c72, #7e22ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 15px;
+  margin: 0;
+}
+
+/* ========================================
+   FORM & INPUTS
+   ======================================== */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.input-group label svg {
+  color: #7e22ce;
+}
+
+.modern-input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: #7e22ce;
+  box-shadow: 0 0 0 4px rgba(126, 34, 206, 0.1);
+}
+
+.modern-input::placeholder {
+  color: #94a3b8;
+}
+
+/* ========================================
+   BUTTON SUBMIT
+   ======================================== */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to right, #1e3c72, #7e22ce);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(126, 34, 206, 0.3);
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   MESSAGES (Success & Error)
+   ======================================== */
+.error-message {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.success-message {
+  color: #10b981;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.auth-footer a {
+  color: #7e22ce;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.auth-footer a:hover {
+  color: #1e3c72;
+  text-decoration: underline;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 30px 20px;
+  }
+}

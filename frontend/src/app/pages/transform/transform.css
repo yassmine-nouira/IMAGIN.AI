@@ -1,0 +1,310 @@
+/* ============================================
+   ARTIFY TRANSFORM PAGE — VAN GOGH STYLE
+   Aesthetic: Artistic Gallery · Textured · Post-Impressionist
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Kalam:wght@300;400&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:host {
+  display: block;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ---- Page Background (L'Atelier) ---- */
+.artify-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #1a2a6c, #0a1128);
+  color: #fdf5e6;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+.bg-art {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/canvas-paper.png");
+  opacity: 0.2;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+.bg-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #fdbb2d, transparent 70%);
+  top: -150px; left: -100px;
+}
+
+.bg-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #224c98, transparent 70%);
+  bottom: -100px; right: -50px;
+}
+
+/* ---- Navigation ---- */
+.artify-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 50px;
+  border-bottom: 1px solid rgba(253, 215, 110, 0.2);
+  background: rgba(10, 17, 40, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Kalam', cursive;
+  font-size: 16px;
+  color: #fdbb2d;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.back-btn:hover { transform: translateX(-5px); }
+
+.nav-logo {
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fdf5e6;
+}
+
+.logo-mark { color: #fdbb2d; margin-right: 8px; }
+
+.nav-badge {
+  font-family: 'Kalam', cursive;
+  font-size: 12px;
+  padding: 5px 15px;
+  border: 1px solid #fdbb2d;
+  color: #fdbb2d;
+  border-radius: 20px;
+}
+
+/* ---- Hero Section ---- */
+.artify-hero {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 60px 24px 40px;
+}
+
+.hero-eyebrow {
+  font-family: 'Kalam', cursive;
+  font-size: 14px;
+  color: #fdbb2d;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: clamp(32px, 5vw, 60px);
+  font-style: italic;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-title em {
+  color: #fdbb2d;
+  font-family: 'Kalam', cursive;
+}
+
+.hero-sub {
+  font-family: 'Kalam', cursive;
+  font-size: 18px;
+  max-width: 550px;
+  margin: 0 auto;
+  color: rgba(253, 245, 230, 0.7);
+}
+
+/* ---- Workspace (The Easels) ---- */
+.workspace {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr 100px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  align-items: center;
+}
+
+.panel {
+  background: rgba(15, 25, 45, 0.7);
+  padding: 25px;
+  border: 8px solid #1a2a6c; /* Cadre de tableau */
+  box-shadow: 15px 15px 0px rgba(0,0,0,0.3);
+  transition: border-color 0.4s ease;
+}
+
+.panel:hover {
+  border-color: #2a5298;
+}
+
+.panel-label {
+  font-family: 'Kalam', cursive;
+  font-size: 14px;
+  color: #fdbb2d;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(253, 215, 110, 0.2);
+  padding-bottom: 5px;
+}
+
+/* ---- Drop Zone / Display ---- */
+.drop-zone, .result-zone {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #050a18;
+  border: 2px dashed rgba(253, 187, 45, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.drop-zone:hover {
+  border-color: #fdbb2d;
+  background: rgba(253, 187, 45, 0.05);
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; filter: blur(10px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* ---- Buttons ---- */
+.panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-transform {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 15px;
+  background: #fdbb2d;
+  color: #0a1128;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); /* Style pinceau */
+}
+
+.btn-transform:hover:not(:disabled) {
+  background: #fdf5e6;
+  transform: scale(1.05);
+}
+
+.btn-ghost {
+  font-family: 'Kalam', cursive;
+  color: #fdbb2d;
+  background: none;
+  border: 1px solid rgba(253, 187, 45, 0.3);
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* ---- Result / Loading ---- */
+.result-loading {
+  text-align: center;
+}
+
+.pulse-ring {
+  width: 80px; height: 80px;
+  border: 3px solid #fdbb2d;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: pulse-art 1.5s infinite;
+}
+
+@keyframes pulse-art {
+  0% { transform: scale(0.8); opacity: 1; box-shadow: 0 0 0 0 rgba(253, 187, 45, 0.7); }
+  100% { transform: scale(1.2); opacity: 0; box-shadow: 0 0 0 20px rgba(253, 187, 45, 0); }
+}
+
+.btn-download {
+  font-family: 'Kalam', cursive;
+  background: #224c98;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ---- Arrow Divider ---- */
+.divider-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fdbb2d;
+}
+
+.arrow-line {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #fdbb2d, transparent);
+}
+
+.arrow-icon {
+  animation: bounceX 2s infinite;
+}
+
+@keyframes bounceX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* ---- Error Bar ---- */
+.error-bar {
+  max-width: 600px;
+  margin: 30px auto;
+  background: rgba(178, 31, 31, 0.2);
+  border: 1px solid #b21f1f;
+  padding: 15px;
+  color: #ff8a8a;
+  font-family: 'Kalam', cursive;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .divider-arrow {
+    transform: rotate(90deg);
+    margin: 20px 0;
+  }
+}

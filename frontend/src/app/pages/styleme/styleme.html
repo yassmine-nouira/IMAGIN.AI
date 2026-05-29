@@ -1,0 +1,148 @@
+<div class="sm-page">
+
+  <!-- Background -->
+  <div class="sm-bg">
+    <div class="sm-orb sm-orb-1"></div>
+    <div class="sm-orb sm-orb-2"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sm-nav">
+    <a class="back-btn" routerLink="/hub">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Retour
+    </a>
+    <div class="nav-logo">✦ STYLE ME</div>
+    <div class="nav-badge">Keras · DeepFashion</div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="sm-hero">
+    <p class="sm-eyebrow">RECOMMANDATION VESTIMENTAIRE</p>
+    <h1 class="sm-title">Analysez votre<br><em>tenue</em></h1>
+    <p class="sm-sub">Le modèle détecte votre vêtement, identifie les couleurs dominantes et propose des conseils de style adaptés.</p>
+  </header>
+
+  <!-- Upload + Result -->
+  <main class="sm-main" [class.has-result]="result">
+
+    <!-- Panel Upload -->
+    <div class="sm-upload-panel">
+      <div class="panel-label">01 · VOTRE PHOTO</div>
+
+      <div class="drop-zone" [class.filled]="imagePreview" (click)="fileInput.click()">
+        <input #fileInput type="file" hidden accept="image/png,image/jpeg,image/jpg,image/webp" (change)="onFileSelected($event)">
+
+        <ng-container *ngIf="!imagePreview">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="drop-icon">
+            <rect x="1" y="1" width="34" height="34" rx="3" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1" opacity="0.3"/>
+            <path d="M18 24V12M18 12l-5 5M18 12l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <p class="drop-txt">Déposer ou cliquer</p>
+          <p class="drop-hint">PNG, JPG · max 16 MB</p>
+        </ng-container>
+
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Aperçu" class="preview-img">
+      </div>
+
+      <div class="upload-actions" *ngIf="imagePreview">
+        <button class="btn-ghost" (click)="reset()">✕ Changer</button>
+        <button class="btn-analyze" (click)="analyze()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">✦ Analyser</span>
+          <span *ngIf="isLoading" class="loading-span">
+            <span class="spin"></span> Analyse…
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel Result -->
+    <div class="sm-result-panel" *ngIf="result && !isLoading">
+
+      <!-- En-tête catégorie -->
+      <div class="result-header">
+        <span class="result-emoji">{{ result.emoji }}</span>
+        <div>
+          <h2 class="result-category">{{ result.category }}</h2>
+          <p class="result-style">Style · <strong>{{ result.style }}</strong></p>
+        </div>
+        <div class="confidence-badge">{{ result.confidence }}%</div>
+      </div>
+
+      <!-- Top 3 prédictions -->
+      <div class="result-section">
+        <p class="section-label">PRÉDICTIONS</p>
+        <div class="top3-list">
+          <div class="top3-item" *ngFor="let item of result.top3; let i = index" [class.first]="i === 0">
+            <span class="top3-rank">{{ i + 1 }}</span>
+            <span class="top3-cat">{{ item.category }}</span>
+            <div class="top3-bar-wrap">
+              <div class="top3-bar" [style.width.%]="item.confidence"></div>
+            </div>
+            <span class="top3-conf">{{ item.confidence }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Couleurs dominantes -->
+      <div class="result-section">
+        <p class="section-label">COULEURS DOMINANTES</p>
+        <div class="colors-row">
+          <div
+            class="color-chip"
+            *ngFor="let c of result.dominant_colors"
+            [style.background]="c.hex"
+            [style.flex]="c.proportion"
+            [title]="c.hex + ' · ' + (c.proportion * 100 | number:'1.0-0') + '%'"
+          >
+            <span class="color-label" [style.color]="getTextColor(c.hex)">{{ c.hex }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="result-section">
+        <p class="section-label">SUGGESTIONS</p>
+        <div class="tips-grid">
+          <div class="tip-chip" *ngFor="let tip of result.tips">
+            <span class="tip-dot">·</span>
+            {{ tip }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Loading state -->
+    <div class="sm-loading" *ngIf="isLoading">
+      <div class="pulse-wrap">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring d1"></div>
+        <div class="pulse-ring d2"></div>
+      </div>
+      <p>Analyse vestimentaire en cours…</p>
+    </div>
+
+    <!-- Idle (pas encore analysé) -->
+    <div class="sm-idle" *ngIf="!result && !isLoading && imagePreview">
+      <p>Cliquez sur <strong>Analyser</strong> pour obtenir votre analyse</p>
+    </div>
+
+    <div class="sm-idle sm-idle-empty" *ngIf="!result && !isLoading && !imagePreview">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <path d="M24 8 L30 20 L44 22 L34 32 L36 46 L24 40 L12 46 L14 32 L4 22 L18 20 Z"
+          stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none" opacity="0.2"/>
+      </svg>
+      <p>Uploadez une photo de votre tenue</p>
+    </div>
+
+  </main>
+
+  <!-- Error -->
+  <div class="sm-error" *ngIf="errorMessage">
+    ⚠ {{ errorMessage }}
+  </div>
+
+</div>

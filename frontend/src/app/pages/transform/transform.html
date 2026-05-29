@@ -1,0 +1,178 @@
+<div class="artify-page">
+
+  <!-- Background -->
+  <div class="bg-art">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="artify-nav">
+    <a class="back-btn" routerLink="/hub">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Retour</span>
+    </a>
+
+    <div class="nav-logo">
+      <span class="logo-mark">✦</span>
+      <span>ARTIFY</span>
+    </div>
+
+    <div class="nav-badge">CycleGAN · v1.0</div>
+  </nav>
+
+  <!-- Hero section -->
+  <header class="artify-hero">
+    <p class="hero-eyebrow">TRANSFORMATION ARTISTIQUE</p>
+    <h1 class="hero-title">
+      Votre photo,<br>
+      <em>réinventée</em>
+    </h1>
+    <p class="hero-sub">
+      Le modèle CycleGAN analyse votre image et applique le style artistique
+      issu d'œuvres WikiArt pour créer une œuvre unique.
+    </p>
+  </header>
+
+  <!-- Main workspace -->
+  <main class="workspace">
+
+    <!-- Upload Zone -->
+    <div class="panel panel-upload">
+      <div class="panel-label">01 · IMAGE ORIGINALE</div>
+
+      <div
+        class="drop-zone"
+        [class.has-image]="imagePreview"
+        (click)="fileInput.click()"
+      >
+        <input
+          #fileInput
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/png, image/jpeg, image/jpg, image/webp"
+          hidden
+        >
+
+        <ng-container *ngIf="!imagePreview">
+          <div class="drop-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="1" y="1" width="38" height="38" rx="4" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.3"/>
+              <path d="M20 28V12M20 12l-6 6M20 12l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+            </svg>
+          </div>
+          <p class="drop-label">Déposer une image ici</p>
+          <p class="drop-hint">ou cliquer pour parcourir — PNG, JPG, JPEG · max 16 MB</p>
+        </ng-container>
+
+        <img
+          *ngIf="imagePreview"
+          [src]="imagePreview"
+          alt="Image originale"
+          class="preview-img"
+        >
+      </div>
+
+      <!-- Actions sous upload -->
+      <div class="panel-actions" *ngIf="imagePreview">
+        <button class="btn-ghost" (click)="reset()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Changer
+        </button>
+
+        <button
+          class="btn-transform"
+          (click)="transform()"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:inline;vertical-align:middle;margin-right:8px;">
+              <path d="M2 8c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 8h-4l2-2M12 10l-2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Transformer
+          </span>
+          <span *ngIf="isLoading" class="loading-text">
+            <span class="spinner"></span>
+            Génération en cours…
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Arrow divider -->
+    <div class="divider-arrow" [class.active]="isLoading || transformedImage">
+      <div class="arrow-line"></div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="arrow-icon">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- Result Zone -->
+    <div class="panel panel-result">
+      <div class="panel-label">02 · RÉSULTAT ARTISTIQUE</div>
+
+      <div class="result-zone" [class.has-result]="transformedImage">
+
+        <!-- Idle state -->
+        <div class="result-idle" *ngIf="!transformedImage && !isLoading">
+          <div class="idle-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3" opacity="0.2"/>
+              <path d="M14 26 Q20 10 26 20 Q28 23 30 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+              <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.2"/>
+            </svg>
+          </div>
+          <p class="idle-label">En attente de transformation</p>
+        </div>
+
+        <!-- Loading state -->
+        <div class="result-loading" *ngIf="isLoading">
+          <div class="loading-visual">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring delay-1"></div>
+            <div class="pulse-ring delay-2"></div>
+          </div>
+          <p class="loading-label">CycleGAN en cours d'exécution…</p>
+          <p class="loading-sub">Le modèle analyse et transforme votre image</p>
+        </div>
+
+        <!-- Result image -->
+        <img
+          *ngIf="transformedImage && !isLoading"
+          [src]="transformedImage"
+          alt="Image artistique"
+          class="preview-img"
+        >
+      </div>
+
+      <!-- Download action -->
+      <div class="panel-actions" *ngIf="transformedImage && !isLoading">
+        <span class="success-badge">✓ {{ successMessage }}</span>
+        <button class="btn-download" (click)="downloadImage()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1v8M4 6l3 3 3-3M1 10v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Télécharger
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Error message -->
+  <div class="error-bar" *ngIf="errorMessage">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M7 4v3M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    {{ errorMessage }}
+  </div>
+
+</div>
